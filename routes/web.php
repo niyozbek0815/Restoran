@@ -26,4 +26,3 @@ Route::get('restoran/{lang}', function ($lang) {
 
 Route::resource('restoran', RestoranController::class);
 Route::resource('/', RestoranController::class);
-Route::resource('/restos', RestoranController::class);
