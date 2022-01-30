@@ -1,0 +1,33 @@
+<?
+return[
+    'menu1'=>'Bosh menu',
+    'menu2'=>'Biz haqimizda',
+    'menu3'=>'Oshpazlar',
+    'menu4'=>'Menu',
+    'menu5'=>'Aloqa',
+    'tell'=>"Qo'ng'iroq Qiling!",
+    'read'=>"Hikoyamizni o'qing",
+    'readh3'=>"Biz 1999-dan beri mazali ovqatlar tayyorlab kelamiz",
+    'read_p'=>'Fusce hendrerit malesuada lacinia. Donec semper semper sem vitae malesuada. Proin scelerisque risus et ipsum semper molestie sed in nisi. Ut rhoncus congue lectus, rhoncus venenatis leo malesuada id.',
+    'read_p2'=>'Sed elementum vel felis sed scelerisque. In arcu diam, sollicitudin eu nibh ac, posuere tristique magna. You can use this template for your cafe or restaurant website. Please tell your friends about templatemo. Thank you.',
+    'chef'=>'Bizning oshpazlar bilan tanishing',
+    'chef_title'=>"ULAR SHIRINSO'Z VA MEXRIBON",
+    'menus'=>'Menyularimiz',
+    'menus_title'=>'CHAY VA TAOM VAQTI',
+    'contact'=>"Biz bilan bog'lanish",
+    'input1'=>"To'liq ismingiz",
+    'input2'=>'Elektron pochta manzili',
+    'input3'=>'Mavzu',
+    'input4'=>'Loyihangiz haqida gapiring',
+    'input5'=>'Xabarni yuborish',
+    'find'=>'Manzilimiz',
+    'find_title'=>'123 nulla a cursus rhoncus,<br> augue sem viverra 10870<br>id ultricies sapien',
+    'res'=>'Buyurtma uchun',
+    'res_1'=>'NAVBAT:tamaddixona',
+    'Open'=>'Ochiq soatlar',
+    'open1'=>'Dushanba: Yopiq',
+    'open2'=>'Payshanba-Jumaga',
+    'open3'=>'Shanba-yakshanba',  
+    'tess'=>"Mijozlarimiz Fikri"  
+    ]
+?>
