@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Restoran_uz extends Model
 {
     use HasFactory;
+    protected $guarded=[];
+
 }

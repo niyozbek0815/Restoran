@@ -1,0 +1,159 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+ 
+ body {
+     margin: 0 auto;
+     background-image: url(../images/bg.jpg);
+     background-attachment: fixed;
+     background-size: cover;
+     padding-top: 100px;
+ }
+ 
+ .logo {
+     font-family: sans-serif;
+     text-align: center;
+     margin: 0 auto;
+     color: white;
+     line-height: 1;
+     cursor: pointer;
+ }
+ 
+ .logo h1 {
+     font-size: 57px;
+ }
+ 
+ .logo h4 {
+     color: #FFFFFFA6;
+     padding-top: 0
+ }
+ 
+ .container {
+     width: 75rem;
+     max-width: 90%;
+     margin: 0 auto;
+     padding-top: 50px;
+ }
+ 
+ .container img {
+     width: 100%;
+ }
+ 
+ .container .wrapper1 {
+     background-color: #fff;
+     padding-top: 59px;
+     text-align: center;
+ }
+ 
+ .container .wrapper1 img {
+     width: 130px;
+     margin-top: 8px;
+ }
+ 
+ .container .wrapper1 h3 {
+     margin-top: 3px;
+     font-size: 13px;
+     color: rgb(187, 185, 185);
+     font-weight: 300;
+     letter-spacing: 3px;
+     padding-bottom: 59px;
+ }
+ 
+ .container .text {
+     padding: 60px;
+     font-size: 15px;
+     letter-spacing: 1px;
+     font-weight: 400;
+     background-color: rgb(247, 242, 242);
+     line-height: 25px;
+ }
+ 
+ .container .wrapper2 {
+     padding: 60px;
+     background-color: rgb(39, 36, 36);
+ }
+ 
+ .container .wrapper2 .box {
+     background-color: rgba(20, 19, 19, 0.911);
+     padding-top: 30px;
+     padding-bottom: 30px;
+     text-align: center;
+     color: white;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif font-weight: 700;
+ }
+ 
+ .container .wrapper2 .box img {
+     width: 130px;
+     margin-top: 8px;
+ }
+ 
+ .container .wrapper2 .box h3 {
+     margin-top: 10px;
+     font-size: 13px;
+     color: rgb(92, 91, 91);
+     font-weight: 300;
+     letter-spacing: 3px;
+ }
+ 
+ .container .wrapper2 .box2 {
+     display: flex;
+     flex-wrap: wrap;
+ }
+ 
+ .container .wrapper2 .box2 img {
+     width: 50%;
+ }
+ 
+ .container .wrapper3 {
+     display: flex;
+     height: 440px;
+ }
+ 
+ .container .wrapper3 img {
+     width: 37.5rem;
+     height: 440px;
+ }
+ 
+ .container .wrapper3 .text h3 {
+     color: black;
+ }
+ 
+ .container .wrapper3 .text {
+     padding: 60px;
+     padding-top: 130px;
+     vertical-align: baseline;
+     color: rgb(187, 185, 185);
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+ 
+ .container .wrapper3 .text2 {
+     background-color: rgb(39, 36, 36);
+     padding: 60px;
+     padding-top: 140px;
+     text-align: right;
+     color: rgb(131, 127, 127);
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+ 
+ .container .wrapper3 .text2 h3 {
+     color: white;
+ }
+ 
+ .container .logo img {
+     width: 170px;
+     margin: 65px auto;
+     margin-bottom: 50px;
+ }
+ 
+ .container .bottom_text {
+     margin: 0px auto 30px auto;
+     text-align: center;
+     color: #bbb;
+     font-size: 15px;
+ }
+ 
+ .container .bottom_text a {
+     color: #bbb;
+ }

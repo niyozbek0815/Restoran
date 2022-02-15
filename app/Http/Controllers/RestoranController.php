@@ -22,6 +22,13 @@ class RestoranController extends Controller
      */
     public function index()
     {
+        $m_uz=Restoran_menu_uz::orderBy('created_at','desc')
+        ->paginate(6);
+        return view('menu.index',['m_uz'=>$m_uz]);
+
+        }
+    public function restoran()
+    {
         $t = app()->getLocale('lang');
         $news = DB::select('select * from restoran_' . $t . 's');
         $news4 = DB::select('select * from  restoran_teste_' . $t . 's');
@@ -30,8 +37,15 @@ class RestoranController extends Controller
 
 
         return view('index', ['slayd1' => $news, 'chefs' => $news2, 'menu' => $news3, 'teste' => $news4]);
-    }
 
+    }
+    public function menu_en()
+    {
+        $m_en=Restoran_menu_en::orderBy('created_at','desc')
+        ->paginate(6);
+
+        return view('menu.menu_en',['m_en'=>$m_en]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +53,7 @@ class RestoranController extends Controller
      */
     public function create()
     {
-        //
+        return view('menu.add_uz');
     }
 
     /**
@@ -50,7 +64,30 @@ class RestoranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->validate([
+            'name'=>'required',
+            'narx'=>'required',
+            'tarkib'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=new Restoran_menu_uz;
+        $r_uzb->name=$data['name'];
+        $r_uzb->narx=$data['narx'];
+        $r_uzb->tarkib=$data['tarkib'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect()->route("admin.index");
+
     }
 
     /**
@@ -72,7 +109,8 @@ class RestoranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $m_uz=Restoran_menu_uz::find($id);
+        return view('menu.edit_uz',['m_uz'=>$m_uz]);
     }
 
     /**
@@ -84,7 +122,31 @@ class RestoranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data=$request->validate([
+            'name'=>'required',
+            'narx'=>'required',
+            'tarkib'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=Restoran_menu_uz::find($id);
+        $r_uzb->name=$data['name'];
+        $r_uzb->narx=$data['narx'];
+        $r_uzb->tarkib=$data['tarkib'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect()->route("admin.index");
+
     }
 
     /**
@@ -95,6 +157,78 @@ class RestoranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $r_menu_uz=Restoran_menu_uz::find($id);
+        $r_menu_uz->delete();
+        return redirect()->route('admin.index');
+    }
+    public function menu_en_add(){
+
+        return view('menu.add_en');
+    }
+
+    public function menu_en_story(Request $request)
+    {
+        $data=$request->validate([
+            'name'=>'required',
+            'narx'=>'required',
+            'tarkib'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=new Restoran_menu_en;
+        $r_uzb->name=$data['name'];
+        $r_uzb->narx=$data['narx'];
+        $r_uzb->tarkib=$data['tarkib'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/menu_en');
+
+    }
+    public function menu_en_dell($id)
+    {
+        $r_menu_en=Restoran_menu_en::find($id);
+        $r_menu_en->delete();
+        return redirect('/menu_en');
+    }
+    public function menu_en_edit($id){
+        $m_uz=Restoran_menu_en::find($id);
+        return view('menu.edit_en',['m_uz'=>$m_uz]);
+    }
+    public function menu_en_update(Request $request, $id)
+    {
+
+        $data=$request->validate([
+            'name'=>'required',
+            'narx'=>'required',
+            'tarkib'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=Restoran_menu_en::find($id);
+        $r_uzb->name=$data['name'];
+        $r_uzb->narx=$data['narx'];
+        $r_uzb->tarkib=$data['tarkib'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/menu_en');
+
     }
 }
