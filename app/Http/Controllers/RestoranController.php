@@ -30,10 +30,10 @@ class RestoranController extends Controller
     public function restoran()
     {
         $t = app()->getLocale('lang');
-        $news = DB::select('select * from restoran_' . $t . 's');
-        $news4 = DB::select('select * from  restoran_teste_' . $t . 's');
-        $news3 = DB::select('select * from  restoran_menu_' . $t . 's');
-        $news2 = DB::select('select * from  restoran_chef_' . $t . 's');
+        $news = DB::select('select * from restoran_' . $t . 's limit 3');
+        $news4 = DB::select('select * from  restoran_teste_' . $t . 's limit 3');
+        $news3 = DB::select('select * from  restoran_menu_' . $t . 's limit 6');
+        $news2 = DB::select('select * from  restoran_chef_' . $t . 's limit 3');
 
 
         return view('index', ['slayd1' => $news, 'chefs' => $news2, 'menu' => $news3, 'teste' => $news4]);
@@ -231,4 +231,156 @@ class RestoranController extends Controller
         return redirect('/menu_en');
 
     }
+    public function chefs_uz(){
+        $chefs_uz=Restoran_chef_uz::paginate(4);
+        return view("xodim.index",['menu_ch_uz'=>$chefs_uz]);
+    }
+    public function chefs_en(){
+        $chefs_uz=Restoran_chef_en::paginate(4);
+        return view("xodim.chef_en",['menu_ch_en'=>$chefs_uz]);
+    }
+    public function chef_en_add(){
+        return view('xodim.add_en');
+    }
+    public function chef_uz_add(){
+        return view('xodim.add_uz');
+    }
+    public function chef_en_story(Request $request)
+    {
+        $data=$request->validate([
+            'name'=>'required',
+            'unvon'=>'required',
+            'title'=>'required',
+            'insag_link'=>'required',
+            'watsap_link'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:10048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=new Restoran_chef_en;
+        $r_uzb->name=$data['name'];
+        $r_uzb->unvon=$data['unvon'];
+        $r_uzb->title=$data['title'];
+        $r_uzb->insag_link=$data['insag_link'];
+        $r_uzb->watsap_link=$data['watsap_link'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/admin/chefs_en');
+    }
+    public function chef_uz_story(Request $request)
+    {
+        $data=$request->validate([
+            'name'=>'required',
+            'unvon'=>'required',
+            'title'=>'required',
+            'insag_link'=>'required',
+            'watsap_link'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:10048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=new Restoran_chef_uz;
+        $r_uzb->name=$data['name'];
+        $r_uzb->unvon=$data['unvon'];
+        $r_uzb->title=$data['title'];
+        $r_uzb->insag_link=$data['insag_link'];
+        $r_uzb->watsap_link=$data['watsap_link'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/admin/xodim');
+    }
+    public function chef_en_dell($id){
+        $dell=Restoran_chef_en::find($id);
+        $dell->delete();
+        return redirect('admin/chefs_en');
+
+    }
+    public function chef_uz_dell($id){
+        $dell=Restoran_chef_uz::find($id);
+        $dell->delete();
+        return redirect('admin/xodim');
+    }
+    public function chef_en_edit($id){
+        $chef_en=Restoran_chef_en::find($id);
+        return view('xodim.edit_en',['chefe'=>$chef_en]);
+    }
+    public function chef_uz_edit($id){
+        $chef_en=Restoran_chef_uz::find($id);
+        return view('xodim.edit_uz',['chefe'=>$chef_en]);
+    }
+    public function chefs_uz_update(Request $request, $id){
+        $data=$request->validate([
+            'name'=>'required',
+            'unvon'=>'required',
+            'title'=>'required',
+            'insag_link'=>'required',
+            'watsasp_link'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=Restoran_chef_uz::find($id);
+        $r_uzb->name=$data['name'];
+        $r_uzb->unvon=$data['unvon'];
+        $r_uzb->title=$data['title'];
+        $r_uzb->insag_link=$data['insag_link'];
+        $r_uzb->watsap_link=$data['watsap_link'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/admin/xodim');
+    }
+    public function chefs_en_update(Request $request , $id){
+        $data=$request->validate([
+            'name'=>'required',
+            'unvon'=>'required',
+            'title'=>'required',
+            'insag_link'=>'required',
+            'watsasp_link'=>'required',
+            'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
+        ]);
+        if($request->hasFile('img') ){
+            $filemodel=$request->file('img');
+            $fileNameWithExt=$filemodel->getClientOriginalName();
+            $filename=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext=$filemodel->getClientOriginalExtension();
+            $fileNameToStory=$filename.'_'.time().".".$ext;
+            $path=$filemodel->storeAs('public/dars14',$fileNameToStory);
+        }else{
+            $fileNameToStory="No_image.jpg";
+        };
+        $r_uzb=Restoran_chef_en::find($id);
+        $r_uzb->name=$data['name'];
+        $r_uzb->unvon=$data['unvon'];
+        $r_uzb->title=$data['title'];
+        $r_uzb->insag_link=$data['insag_link'];
+        $r_uzb->watsap_link=$data['watsap_link'];
+        $r_uzb->img=$fileNameToStory;
+        $r_uzb->save();
+        return redirect('/admin/chefs_en');
+    }
+
 }

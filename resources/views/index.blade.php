@@ -67,13 +67,16 @@ http://www.templatemo.com/tm-515-eatery
 
                     <ul class="nav navbar-nav navbar-right">
                          <li><a href="#">{{ __('til.tell') }}&nbsp;&nbsp;<i class="fa fa-phone"></i> 010 020 0340</a>
-                             <select class="section-btn" id="til">
 
-                                 <option value="uz" {{ session()->get('lang')=='uz'?
-                                      'selected':''}}>uz</option>
-                            <option value="en" {{ session()->get('lang')=='en'?
-                              'selected':''}}>en</option>
-                         </select>
+                         </li>
+                         <li>
+                            <select class="section-btn" id="til">
+
+                                <option value="uz" {{ session()->get('lang')=='uz'?
+                                     'selected':''}}>uz</option>
+                           <option value="en" {{ session()->get('lang')=='en'?
+                             'selected':''}}>en</option>
+                        </select>
                          </li>
 
 

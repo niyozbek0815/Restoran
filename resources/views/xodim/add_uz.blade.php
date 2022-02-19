@@ -6,6 +6,7 @@ class="active"
 @section('content')
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
              <a class="navbar-brand" href="#">Menu</a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,8 +21,8 @@ class="active"
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a href="{{ route("admin.index") }}" class="btn btn-info mr-2">Uzbek table</a>
-                <a href="/admin/chefs_en/" class="btn btn-info">Home</a>
+                <a href="/admin/xodim" class="btn btn-info mr-2">English table</a>
+                <a href="/admin/chefs_en" class="btn btn-info">Home</a>
             </form>
         </div>
     </nav>
@@ -35,12 +36,14 @@ class="active"
         </ul>
     </div>
 @endif
-        <form action="/admin/menu_en_story" enctype= "multipart/form-data" method="post" class="row ml-5 me-5  ">
+        <form action="/admin/chef_uz_story" enctype= "multipart/form-data" method="post" class="row ml-5 me-5  ">
             @csrf
 
-                <input type="text" name="name" required class="form-control col-6 mb-2" placeholder="EN  Taom nomini kiriting">
-                <input type="number" name="narx" required class="form-control col-6" placeholder="En  Taom narxini kiriting">
-                <textarea name="tarkib" id="" required cols="30" rows="5" class=" mt-2 form-control" placeholder="En  Taom tarkibini kiriting"></textarea>
+                <input type="text" name="name" required class="form-control col-6 mb-2" placeholder="Xodim ismini kiriting">
+                <input type="text" name="unvon" required class="form-control col-6" placeholder="Xodim unvonini kiriting">
+                <textarea name="title" id="" required cols="30" rows="5" class=" mt-2 form-control" placeholder="Xodim haqida maluotlarni  kiriting"></textarea>
+                <input type="text" name="insag_link" required class="form-control mt-2 col-6 mb-2" placeholder="Xodim instagramini kiriting">
+                <input type="text" name="watsap_link" required class="form-control col-6" placeholder="Xodim watsapini kiriting">
                 <input type="file" name="img" required class="form-control mt-2">
                 <input type="submit" value="Save" class="btn btn-info mt-3">
 
