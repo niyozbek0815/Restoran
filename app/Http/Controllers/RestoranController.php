@@ -30,8 +30,8 @@ class RestoranController extends Controller
     public function restoran()
     {
         $t = app()->getLocale('lang');
-        $news = DB::select('select * from restoran_' . $t . 's limit 3');
-        $news4 = DB::select('select * from  restoran_teste_' . $t . 's limit 3');
+        $news = DB::select('select * from restoran_' . $t . 's  limit 3');
+        $news4 = DB::select('select * from  restoran_teste_' . $t . 's where status=1 limit 3');
         $news3 = DB::select('select * from  restoran_menu_' . $t . 's limit 6');
         $news2 = DB::select('select * from  restoran_chef_' . $t . 's limit 3');
 
@@ -330,7 +330,7 @@ class RestoranController extends Controller
             'unvon'=>'required',
             'title'=>'required',
             'insag_link'=>'required',
-            'watsasp_link'=>'required',
+            'watsap_link'=>'required',
             'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
         ]);
         if($request->hasFile('img') ){
@@ -359,7 +359,7 @@ class RestoranController extends Controller
             'unvon'=>'required',
             'title'=>'required',
             'insag_link'=>'required',
-            'watsasp_link'=>'required',
+            'watsap_link'=>'required',
             'img'=>'required|image|mimes:jpg,png,jpg,gif,svg|max:5048',
         ]);
         if($request->hasFile('img') ){
@@ -382,5 +382,110 @@ class RestoranController extends Controller
         $r_uzb->save();
         return redirect('/admin/chefs_en');
     }
+    public function mijoz(){
+        $m_uz=Restoran_teste_uz::orderBy("created_at","desc")->paginate(10);
+        return view("mijoz.index",["m_uz"=>$m_uz]);
+    }
+    public function mijoz_en(){
+        $m_uz=Restoran_teste_en::orderBy("created_at","desc")->paginate(10);
+        return view("mijoz.mijoz_en",["m_uz"=>$m_uz]);
+    }
+    public function mijoz_show($id){
+        $mijoz_uz=Restoran_teste_uz::find($id);
+        return view("mijoz.show_uz",["mijoz_uz"=>$mijoz_uz]);
+    }
+    public function mijoz_en_show($id){
+        $mijoz_en=Restoran_teste_en::find($id);
+        return view("mijoz.show_en",["mijoz_en"=>$mijoz_en]);
+    }
+    public function mijoz_status($id){
+        $m_s=Restoran_teste_uz::find($id);
+        $m=$id;
+        if($m_s->status===0){
+            $m=1;
+        }else{
+            $m=0;
+        }
+        $m_s->status=$m;
+        $m_s->save();
+        return redirect()->back();
+    }
+    public function mijoz_en_status($id){
+        $m_s=Restoran_teste_en::find($id);
+        $m=$id;
+        if($m_s->status===0){
+            $m=1;
+        }else{
+            $m=0;
+        }
+        $m_s->status=$m;
+        $m_s->save();
+        return redirect()->back();
+
+    }
+    public function slayd_uz(){
+        $m_uz=Restoran_uz::orderBy("created_at","DESC")->paginate(8);
+        return view("slayd.index",["m_uz"=>$m_uz]);
+    }
+    public function slayd_en(){
+        $m_uz=Restoran_en::orderBy("created_at","DESC")->paginate(8);
+        return view("slayd.slayd_en",["m_uz"=>$m_uz]);
+    }
+    public function slayd_uz_add(){
+        return view("slayd.add_uz");
+    }
+    public function slayd_en_add(){
+        return view("slayd.add_en");
+    }
+    public function slayd_uz_story(Request $request){
+        $data=$request->validate([
+            'title'=>'required',
+            'text'=>'required',
+            'button'=>'required',
+        ]);
+
+        $r_uzb=new Restoran_uz;
+        $r_uzb->title=$data['title'];
+        $r_uzb->text=$data['text'];
+        $r_uzb->button=$data['button'];
+
+        $r_uzb->save();
+        return redirect('/admin/slayd');
+    }
+    public function slayd_en_story(Request $request){
+        $data=$request->validate([
+            'title'=>'required',
+            'text'=>'required',
+            'button'=>'required',
+        ]);
+
+        $r_uzb=new Restoran_en;
+        $r_uzb->title=$data['title'];
+        $r_uzb->text=$data['text'];
+        $r_uzb->button=$data['button'];
+
+        $r_uzb->save();
+        return redirect('/admin/slayd_en');
+    }
+    public function slayd_uz_dell($id){
+        $slayd=Restoran_uz::find($id);
+        $slayd->delete();
+        return redirect()->back();
+    }
+    public function slayd_en_dell($id){
+        $slayd=Restoran_en::find($id);
+        $slayd->delete();
+        return redirect()->back();
+    }
+    public function slayd_uz_edit($id){
+        $slayd=Restoran_uz::find($id);
+        return view("slayd.edit_uz",["slayd"=>$slayd]);
+
+    }
+    public function slayd_en_edit($id){
+        $slayd=Restoran_en::find($id);
+        return view("slayd.edit_en",["slayd"=>$slayd]);
+    }
+
 
 }

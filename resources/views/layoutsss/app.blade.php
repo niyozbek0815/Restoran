@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
      <!-- Scripts -->
@@ -43,9 +44,8 @@
             <ul class="menu">
                 <li @yield('a1') ><span class="aylana "></span><a href="/admin">Menu</a></li>
                 <li @yield('a2')><span class="aylana"></span><a href="/admin/xodim">Xodimlar</a></li>
-                <li @yield('a3')><span class="aylana"></span><a href="/admin/buyurtma">Buyurtmalar</a></li>
-                <li @yield('a4')><span class="aylana"></span><a href="/admin/client">Mijozlar</a></li>
-                <li @yield('a5')><span class="aylana"></span><a href="/admin/categoriya">Kategoriya</a></li>
+                <li @yield('a3')><span class="aylana"></span><a href="/admin/mijoz">Mijozlarimiz fikri</a></li>
+                <li @yield('a4')><span class="aylana"></span><a href="/admin/slayd">Slayd</a></li>
                 <li @yield('a6')><span class="aylana"></span><a href="/admin/hisobot">Hisobot</a></li>
             </ul>
         </div>
